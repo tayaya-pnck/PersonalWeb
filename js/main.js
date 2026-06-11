@@ -8,22 +8,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function resizeCanvas() {
     const hero = document.getElementById('hero');
+    if (!hero) return;
     canvas.width = hero.offsetWidth;
     canvas.height = hero.offsetHeight;
     initStars();
   }
 
   function initStars() {
-    starCount = Math.floor((canvas.width * canvas.height) / 4000);
+    starCount = Math.floor((canvas.width * canvas.height) / 3500);
     stars = [];
     for (let i = 0; i < starCount; i++) {
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 1.6 + 0.4,
-        alpha: Math.random() * 0.6 + 0.2,
-        drift: Math.random() * 0.15 + 0.02,
-        twinkleSpeed: Math.random() * 0.02 + 0.005,
+        size: Math.random() * 1.8 + 0.3,
+        alpha: Math.random() * 0.5 + 0.15,
+        drift: Math.random() * 0.12 + 0.01,
+        twinkleSpeed: Math.random() * 0.02 + 0.004,
         twinklePhase: Math.random() * Math.PI * 2,
       });
     }
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function drawStars(time) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     stars.forEach(s => {
-      const twinkle = s.alpha * (0.7 + 0.3 * Math.sin(time * s.twinkleSpeed + s.twinklePhase));
+      const twinkle = s.alpha * (0.6 + 0.4 * Math.sin(time * s.twinkleSpeed + s.twinklePhase));
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(255, 255, 255, ${twinkle})`;
@@ -96,16 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ========== NAVBAR SCROLL ==========
   const navbar = document.getElementById('navbar');
-  let lastScroll = 0;
-
   window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    if (scrollY > 50) {
+    if (window.scrollY > 50) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
-    lastScroll = scrollY;
   });
 
   // ========== MOBILE NAV TOGGLE ==========
@@ -126,16 +123,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ========== SCROLL REVEAL ==========
   const revealElements = document.querySelectorAll(
-    '.about-grid, .timeline, .projects-grid, .skills-grid, .education-content, .leadership-card, .contact-grid'
+    '.about-grid, .timeline, .projects-grid, .skills-grid, .education-grid, .contact-grid'
   );
 
   const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px',
+    rootMargin: '0px 0px -60px 0px',
   };
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
         observer.unobserve(entry.target);
@@ -177,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 40);
   }
 
-  // ========== SMOOTH SCROLL FOR NAV ==========
+  // ========== SMOOTH SCROLL ==========
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       const target = document.querySelector(anchor.getAttribute('href'));
@@ -188,59 +185,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ========== PARALLAX V-FIN ==========
-  const vfin = document.querySelector('.v-fin');
+  // ========== V-FIN PARALLAX ==========
+  const vfin = document.querySelector('.v-fin-container');
   if (vfin) {
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
       const heroHeight = document.getElementById('hero').offsetHeight;
       const progress = Math.min(scrollY / heroHeight, 1);
-      vfin.style.transform = `translateX(-50%) translateY(${progress * -20}px)`;
-      vfin.style.opacity = 1 - progress * 0.8;
+      vfin.style.transform = `translateY(${progress * -30}px)`;
+      vfin.style.opacity = Math.max(1 - progress * 1.2, 0);
     });
   }
 
-  // ========== PSYCHO-FRAME GLOW TRAIL ON MOUSE ==========
-  const hero = document.getElementById('hero');
-  let mouseGlow = null;
-
+  // ========== MOUSE GLOW ==========
   if (window.innerWidth > 768) {
-    mouseGlow = document.createElement('div');
-    mouseGlow.className = 'mouse-glow';
-    mouseGlow.style.cssText = `
+    const glow = document.createElement('div');
+    glow.style.cssText = `
       position: fixed;
-      width: 200px;
-      height: 200px;
+      width: 220px;
+      height: 220px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 0, 60, 0.04), transparent 70%);
+      background: radial-gradient(circle, rgba(220, 38, 38, 0.04), transparent 70%);
       pointer-events: none;
       z-index: 9999;
       transform: translate(-50%, -50%);
       transition: opacity 0.3s;
       opacity: 0;
     `;
-    document.body.appendChild(mouseGlow);
+    document.body.appendChild(glow);
 
-    let mouseTimeout;
-
+    let timeout;
     document.addEventListener('mousemove', (e) => {
-      mouseGlow.style.left = e.clientX + 'px';
-      mouseGlow.style.top = e.clientY + 'px';
-      mouseGlow.style.opacity = '1';
-      clearTimeout(mouseTimeout);
-      mouseTimeout = setTimeout(() => {
-        mouseGlow.style.opacity = '0';
-      }, 2000);
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+      glow.style.opacity = '1';
+      clearTimeout(timeout);
+      timeout = setTimeout(() => { glow.style.opacity = '0'; }, 2000);
     });
-
-    document.addEventListener('mouseleave', () => {
-      mouseGlow.style.opacity = '0';
-    });
+    document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
   }
 
-  // ========== PROJECT CARD TILT EFFECT ==========
-  const cards = document.querySelectorAll('.project-card');
-  cards.forEach(card => {
+  // ========== PROJECT CARD TILT ==========
+  document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -255,10 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
     card.addEventListener('mouseleave', () => {
       card.style.transform = '';
     });
-  });
 
-  // ========== GLOW LINE TRACKING ON PROJECT CARDS ==========
-  cards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -267,4 +250,20 @@ document.addEventListener('DOMContentLoaded', () => {
       card.style.setProperty('--mouse-y', y + '%');
     });
   });
+
+  // ========== REVEAL CSS ==========
+  const style = document.createElement('style');
+  style.textContent = `
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  `;
+  document.head.appendChild(style);
+
 });
