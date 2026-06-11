@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Moon, Sun } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
   const [isDark, setIsDark] = useState(false);
@@ -44,9 +45,10 @@ const Navbar = () => {
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="font-mono font-bold text-xl tracking-tighter text-primary dark:text-gray-100"
+            className="flex items-center gap-3 font-mono font-bold text-xl tracking-tighter text-primary dark:text-gray-100"
           >
-            SYS.<span className="text-gundamBlue">ATHAYA</span>
+            <img src={logo} alt="Logo" className="w-8 h-8 object-contain" />
+            <span>SYS.<span className="text-gundamBlue">ATHAYA</span></span>
           </motion.div>
           
           <div className="hidden md:flex space-x-8">
