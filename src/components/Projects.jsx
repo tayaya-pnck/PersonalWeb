@@ -10,35 +10,35 @@ const Projects = () => {
       year: '2026',
       tech: ['Spring Boot 4', 'Java 21', 'JWT', 'PostgreSQL', 'React'],
       description: 'Secure finance application with stateless authentication. Built complex financial calculations using Java Streams API and BigDecimal. Features a responsive React dashboard consuming the REST API.',
-      githubLink: 'https://github.com/tayaya-pnck/personal-finance-tracker'
+      githubLink: 'https://github.com/tayaya-pnck/Personal-Financial-Management.git'
     },
     {
       title: 'UMKM Inventory Stock Prediction',
       year: '2026',
       tech: ['Java', 'Spring Boot', 'Python', 'Scikit-Learn'],
       description: 'RESTful API serving inventory predictions based on historical sales data. Integrated a time-series forecasting model (85% accuracy) into the Java backend via a REST endpoint.',
-      githubLink: 'https://github.com/tayaya-pnck/umkm-inventory-prediction'
+      githubLink: 'https://github.com/tayaya-pnck/autostock.git'
     },
     {
       title: 'Gym Reminder & Progress Tracker',
       year: '2026',
       tech: ['Spring Boot', 'MySQL', 'Spring Task', 'JPA'],
       description: 'Lifestyle productivity backend with automated notification scheduling and workout tracking. Designed a relational database schema and leveraged Lombok to reduce boilerplate.',
-      githubLink: 'https://github.com/tayaya-pnck/gym-tracker-backend'
+      githubLink: 'https://github.com/tayaya-pnck/GymTracker.git'
     },
     {
       title: 'FindQuest – Gamified Gig Platform',
       year: '2026',
       tech: ['Supabase', 'PostgreSQL', 'System Design'],
       description: 'Architected cloud backend infrastructure. Designed DB schema to handle user locations, points, and task queues. Translated PRD into technical backend specifications.',
-      githubLink: 'https://github.com/tayaya-pnck/findquest-system-design'
+      githubLink: 'https://github.com/tayaya-pnck/TheGuild.git'
     },
     {
       title: 'Respiratory Disease Classification',
       year: '2025',
       tech: ['Python', 'CNN-BiGRU', 'Machine Learning'],
       description: 'Co-authored a hybrid CNN-BiGRU model achieving 97% accuracy. Published at Brawijaya International Conference 2025.',
-      githubLink: 'https://github.com/tayaya-pnck/respiratory-disease-ml'
+      githubLink: 'https://github.com/tayaya-pnck/LungSoundClassification.git'
     }
   ];
 
