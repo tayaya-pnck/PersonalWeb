@@ -91,6 +91,43 @@
     border-color: #ED1A3B;
   }
 
+  .target-lock-frame {
+    position: relative;
+  }
+
+  .target-lock-frame::before,
+  .target-lock-frame::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-color: #0055A4;
+    border-style: solid;
+    opacity: 1;
+    pointer-events: none;
+    z-index: 20;
+    transition: border-color 0.3s ease, width 0.3s ease, height 0.3s ease;
+  }
+
+  .target-lock-frame::before {
+    top: -8px;
+    left: -8px;
+    border-width: 3px 0 0 3px;
+  }
+
+  .target-lock-frame::after {
+    bottom: -8px;
+    right: -8px;
+    border-width: 0 3px 3px 0;
+  }
+  
+  .group:hover .target-lock-frame::before,
+  .group:hover .target-lock-frame::after {
+    width: 32px;
+    height: 32px;
+    border-color: #ED1A3B;
+  }
+
   /* Thin crosshair divider */
   .crosshair-divider {
     position: relative;
