@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Moon, Sun } from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 
 const Navbar = () => {
   const [isDark, setIsDark] = useState(false);
@@ -75,17 +75,6 @@ const Navbar = () => {
             >
               {isDark ? <Sun size={20} /> : <Moon size={20} />}
             </motion.button>
-
-            <motion.a 
-              href="/CV_AthayaAbdanHanif_JavaEngineer.pdf"
-              download
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="hidden md:flex items-center gap-2 bg-gundamBlue text-white px-4 py-2 text-sm font-bold font-mono tracking-wider hover:bg-gundamBlue/90 transition-colors target-lock-hover"
-            >
-              <Download size={16} />
-              CV.PDF
-            </motion.a>
           </div>
         </div>
       </div>
