@@ -92,41 +92,51 @@
   }
 
   .target-lock-frame {
-    position: relative;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
   }
 
-  .target-lock-frame::before,
-  .target-lock-frame::after {
-    content: '';
+  .target-lock-corner {
     position: absolute;
     width: 24px;
     height: 24px;
     border-color: #0055A4;
     border-style: solid;
-    opacity: 1;
-    pointer-events: none;
-    z-index: 20;
-    transition: border-color 0.3s ease, width 0.3s ease, height 0.3s ease;
+    transition: border-color 0.3s ease, width 0.3s ease, height 0.3s ease, transform 0.3s ease;
   }
 
-  .target-lock-frame::before {
-    top: -8px;
-    left: -8px;
+  .tl-top-left {
+    top: -8px; left: -8px;
     border-width: 3px 0 0 3px;
   }
-
-  .target-lock-frame::after {
-    bottom: -8px;
-    right: -8px;
-    border-width: 0 3px 3px 0;
+  
+  .tl-top-right {
+    top: -8px; right: -8px;
+    border-width: 3px 3px 0 0;
   }
   
-  .group:hover .target-lock-frame::before,
-  .group:hover .target-lock-frame::after {
+  .tl-bottom-left {
+    bottom: -8px; left: -8px;
+    border-width: 0 0 3px 3px;
+  }
+  
+  .tl-bottom-right {
+    bottom: -8px; right: -8px;
+    border-width: 0 3px 3px 0;
+  }
+
+  .group:hover .target-lock-corner {
     width: 32px;
     height: 32px;
     border-color: #ED1A3B;
   }
+  
+  .group:hover .tl-top-left { transform: translate(-4px, -4px); }
+  .group:hover .tl-top-right { transform: translate(4px, -4px); }
+  .group:hover .tl-bottom-left { transform: translate(-4px, 4px); }
+  .group:hover .tl-bottom-right { transform: translate(4px, 4px); }
 
   /* Thin crosshair divider */
   .crosshair-divider {

@@ -77,8 +77,13 @@ const Hero = () => {
           {/* Stylized Frame Background */}
           <div className="absolute inset-0 border border-gray-300 dark:border-slate-700 bg-white dark:bg-darkSurface translate-x-3 translate-y-3 transition-transform group-hover:translate-x-4 group-hover:translate-y-4"></div>
           
-          {/* Target Lock Frame (Persistent) */}
-          <div className="absolute inset-0 target-lock-frame z-20 pointer-events-none"></div>
+          {/* Target Lock Frame (Persistent 4 corners) */}
+          <div className="target-lock-frame">
+            <div className="target-lock-corner tl-top-left"></div>
+            <div className="target-lock-corner tl-top-right"></div>
+            <div className="target-lock-corner tl-bottom-left"></div>
+            <div className="target-lock-corner tl-bottom-right"></div>
+          </div>
 
           {/* Image Container */}
           <div className="absolute inset-0 overflow-hidden border border-gray-200 dark:border-slate-700 bg-gray-100 dark:bg-slate-800">
